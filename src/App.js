@@ -1,24 +1,54 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from "react";
+import "./App.css";
+import UserCard from "./components/UserCard";
+import axios from "axios";
+import SearchBar from "./components/SearchBar";
+import Home from './Pages/Home'
 
 function App() {
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [searchvalue, setSearchValue] = useState();
+  const searchRequest = async () => {
+
+    try {
+      setLoading(true);
+      const result = await axios.get("https://api.github.com/users/adoulii");
+      setUser(result.data);
+      setLoading(false);
+    } catch (err) {
+      setError("no data found");
+      setLoading(false);
+      console.log(err);
+    }
+  };
+
+  const dateFormatter = () => {
+    const date = user.created_at
+    console.log(date)
+    //console.log(new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long' }).format(date));
+   //const date = user.created_at
+   //console.log(date)
+
+  }
+
+  useEffect(() => {
+    searchRequest();
+    dateFormatter();
+    console.log(user)
+  }, [searchvalue]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {error ? <div>Error fetching data</div> : ''}
+      {loading ? <div>loading...</div> : ''}
+      {(!error && !loading)  ?<div></div> : ''}
+      {/* <UserCard data={user}/> */}
+      <SearchBar handleSearch={setSearchValue} search={searchvalue}  />
+      <UserCard data={user} />
+     
+    </>
   );
 }
 
