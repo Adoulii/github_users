@@ -7,7 +7,7 @@ import LightModeButton from "./LightModeButton";
 function SearchBox({ value, test,user }) {
   return (
     <div className="Search">
-      <form className="flex flex-row justify-between items-center  ">
+      <form className="flex flex-row justify-between items-center ">
         <div className="flex flex-row space-x-2 items-center">
           <div>
             <FaSearch className=" text-indigo-600" />

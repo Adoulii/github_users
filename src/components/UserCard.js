@@ -16,17 +16,17 @@ function UserCard({ data, loading }) {
   const dateFormatter = () => {
     const date_user = data.created_at;
     const date = new Date(date_user);
-    const joined_date = new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "2-digit",
-    }).format(date);
-    return joined_date;
+    // const joined_date = new Intl.DateTimeFormat("en-US", {
+    //   year: "numeric",
+    //   month: "short",
+    //   day: "2-digit",
+    // }).format(date);
+    // return joined_date;
   };
 
   return (
     <>
-      <div className="grid grid-cols-7 ">
+      <div className="grid grid-cols-1 sm:grid-cols-7  ">
         <div className="col-start-3 w-auto col-span-3 bg-indigo-50 px-4 py-4 items-center rounded-xl  ">
           <div className="grid grid-cols-4 ">
             {loading ? (
@@ -94,34 +94,34 @@ function UserCard({ data, loading }) {
                       </div>
                     </div>
                   </div>
-                  <div className="contact grid grid-cols-5 py-4 lg:grid-cols-7">
-                    <div className=" col-start-1 col-span-1 space-y-4 itmes-center px-4 ">
-                      <div>
-                        <FaMapMarkerAlt className="text-lg text-gray-600" />
-                        <h1 className="font-Outfit">{data.location}</h1>
+                  <div className="contact block sm:grid grid-cols-5 space-x-4   ">
+                    <div className=" col-start-1 col-span-2 space-y-4 itmes-center px-4 ">
+                      <div className="space-x-2">
+                        <FaMapMarkerAlt className="text-lg text-gray-600 inline-block" />
+                        <h1 className="font-Outfit inline-block">{data.location}</h1>
                       </div>
-                      <div>
-                        <FaLink className="text-lg text-gray-600" />
-                        <h1 className="font-Outfit">{data.html_url}</h1>
+                      <div className="space-x-2">
+                        <FaLink className="text-lg text-gray-600 inline-block" />
+                        <h1 className="font-Outfit inline-block">{data.html_url}</h1>
                       </div>
                     </div>
-                    <div className=" col-start-4 col-span-2 space-y-4 itmes-center ">
-                      <div>
+                    <div className=" col-start-4 col-span-2 space-y-4 itmes-center   ">
+                      <div className="space-x-2">
                         {data.twitter_username !== null ? (
                           <>
-                            <FaTwitter className="text-lg text-gray-600 " />
-                            <h1 className="font-Outfit">{data.twitter_username}</h1>
+                            <FaTwitter className="text-lg text-gray-600 inline-block" />
+                            <h1 className="font-Outfit inline-block">{data.twitter_username}</h1>
                           </>
                         ) : (
                           <>
-                            <FaTwitter className="text-lg text-gray-600" />
-                            <h1 className="font-Outfit">Not Available</h1>
+                            <FaTwitter className="text-lg text-gray-600 inline-block" />
+                            <h1 className="font-Outfit inline-block">Not Available</h1>
                           </>
                         )}
                       </div>
-                      <div>
-                        <FaCode className="text-lg text-gray-600" />
-                        <h1 className="font-Outfit">{data.company}</h1>
+                      <div className="space-x-2">
+                        <FaCode className="text-lg text-gray-600 inline-block" />
+                        <h1 className="font-Outfit inline-block">{data.company}</h1>
                       </div>
                     </div>
                   </div>
