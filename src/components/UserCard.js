@@ -13,21 +13,17 @@ import {
   FaPlaceOfWorship,
 } from "react-icons/fa";
 function UserCard({ data, loading }) {
-  // const dateFormatter = new Intl.DateTimeFormat("en-US", {
-  //   year: 'numeric',
-  //   month: 'short',
-  //   day: 'numeric',
-  // });
+  const dateFormatter = () => {
+    const date_user = data.created_at;
+    const date = new Date(date_user);
+    const joined_date = new Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "2-digit",
+    }).format(date);
+    return joined_date;
+  };
 
-  // const joinedAt = (() => {
-  //   if (!data.created_at) {
-  //     return ''
-  //   }
-  //   else {
-  //     const date = new Date(data.created_at);
-  //   }
-  //   return dateFormatter.format(date);
-  // })
   return (
     <>
       <div className="grid grid-cols-7 ">
@@ -50,30 +46,30 @@ function UserCard({ data, loading }) {
                 <div className="col-start-2 col-span-3">
                   <div className="info pt-4 flex flex-row justify-between px-4">
                     <div>
-                      <h1 className="text-gray-700 font-mono font-extrabold   ">
+                      <h3 className="text-gray-700  font-extrabold font-Outfit">
                         {data.name}
-                      </h1>
+                      </h3>
                     </div>
                     <div>
-                      <span>{data.created_at}</span>
+                      <span className="font-Outfit">{"Joined at " + dateFormatter()}</span>
                     </div>
                   </div>
                   <div className="flex flex-col px-5 space-y-3">
                     <div>
-                      <h1 className="text-indigo-600 font-extrabold ">
+                      <h1 className="text-indigo-600 font-extrabold font-Outfit ">
                         {data.login}
                       </h1>
                     </div>
                     <div className="bio">
-                      <span className="overflow-ellipsis text-xs ">
+                      <span className="overflow-ellipsis text-sm font-Outfit ">
                         {data.bio}
                       </span>
                     </div>
                   </div>
                   <div className="stat">
-                    <div className="bg-indigo-100 rounded-xl flex flex-row justify-between px-8 py-2 ">
-                      <div className="flex flex-col space-y-2 items-center">
-                        <h1 className="text-gray-700 text-xs font-medium">
+                    <div className="bg-indigo-100 rounded-xl flex flex-row justify-between px-8 py-2 flex-wrap ">
+                      <div className="flex flex-col space-y-2 items-center ">
+                        <h1 className="text-gray-700 text-xs font-medium ">
                           Repos
                         </h1>
                         <h1 className="text-gray-700 text-xs">
@@ -98,34 +94,34 @@ function UserCard({ data, loading }) {
                       </div>
                     </div>
                   </div>
-                  <div className="contact grid grid-cols-5 py-4">
+                  <div className="contact grid grid-cols-5 py-4 lg:grid-cols-7">
                     <div className=" col-start-1 col-span-1 space-y-4 itmes-center px-4 ">
                       <div>
                         <FaMapMarkerAlt className="text-lg text-gray-600" />
-                        <h1>{data.location}</h1>
+                        <h1 className="font-Outfit">{data.location}</h1>
                       </div>
                       <div>
                         <FaLink className="text-lg text-gray-600" />
-                        <h1>{data.html_url}</h1>
+                        <h1 className="font-Outfit">{data.html_url}</h1>
                       </div>
                     </div>
                     <div className=" col-start-4 col-span-2 space-y-4 itmes-center ">
                       <div>
                         {data.twitter_username !== null ? (
                           <>
-                            <FaTwitter className="text-lg text-gray-600" />
-                            <h1>{data.twitter_username}</h1>
+                            <FaTwitter className="text-lg text-gray-600 " />
+                            <h1 className="font-Outfit">{data.twitter_username}</h1>
                           </>
                         ) : (
                           <>
                             <FaTwitter className="text-lg text-gray-600" />
-                            <h1>Not Available</h1>
+                            <h1 className="font-Outfit">Not Available</h1>
                           </>
                         )}
                       </div>
                       <div>
                         <FaCode className="text-lg text-gray-600" />
-                        <h1>{data.company}</h1>
+                        <h1 className="font-Outfit">{data.company}</h1>
                       </div>
                     </div>
                   </div>

@@ -14,9 +14,7 @@ function App() {
   const searchRequest = async () => {
     try {
       setLoading(true);
-      const result = await axios.get(
-        `https://api.github.com/users/${searchvalue}`
-      );
+      const result = await axios.get(`https://api.github.com/users/adoulii`);
       setUser(result.data);
       setLoading(false);
     } catch (err) {
@@ -26,17 +24,10 @@ function App() {
     }
   };
 
-  const dateFormatter = () => {
-    const date = user.created_at;
-    console.log(date);
-    //console.log(new Intl.DateTimeFormat('en-GB', { dateStyle: 'full', timeStyle: 'long' }).format(date));
-    //const date = user.created_at
-    //console.log(date)
-  };
+  
 
   useEffect(() => {
     searchRequest();
-    dateFormatter();
     console.log(user);
   }, [searchvalue]);
 
