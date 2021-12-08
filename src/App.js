@@ -7,14 +7,15 @@ import Home from "./Pages/Home";
 import Spinner from "./components/ui/Spinner";
 
 function App() {
-  const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [searchvalue, setSearchValue] = useState();
-  const searchRequest = async () => {
+
+  const searchRequest = async (search) => {
     try {
       setLoading(true);
-      const result = await axios.get(`https://api.github.com/users/adoulii`);
+      const result = await axios.get(`https://api.github.com/users/${search}`);
+      console.log(result.data);
       setUser(result.data);
       setLoading(false);
     } catch (err) {
@@ -25,13 +26,13 @@ function App() {
   };
 
   useEffect(() => {
-    searchRequest();
+    searchRequest("adoulii");
     console.log(user);
-  }, [searchvalue]);
+  }, []);
 
   return (
     <div>
-      <SearchBar handleSearch={setSearchValue} search={searchvalue} />
+      <SearchBar searchRequest={searchRequest} />
       <UserCard data={user} loading={loading} />
     </div>
   );
